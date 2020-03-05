@@ -7,6 +7,7 @@ import com.tsoft.bot.frontend.utility.GenerateWord;
 import com.tsoft.bot.frontend.utility.Sleeper;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
@@ -662,6 +663,7 @@ public class MovistarFija {
             Sleeper.Sleep(1500);
             ExtentReportUtil.INSTANCE.stepPass(driver, "Agregar email");
             scrollBar();
+            ExtentReportUtil.INSTANCE.stepPass(driver, "Click en el boton Continuar");
             generateWord.sendText("Click en el boton Continuar");
             generateWord.addImageToWord(driver);
             scrollBar();
@@ -689,16 +691,15 @@ public class MovistarFija {
             generateWord.sendText("Se muestra el plan a contratar");
             generateWord.addImageToWord(driver);
             ExtentReportUtil.INSTANCE.stepPass(driver, "Click en el boton Continuar");
-            Thread.sleep(3000);
             scrollBar();
-            Sleeper.Sleep(1500);
-            ExtentReportUtil.INSTANCE.stepPass(driver, "Click en el boton Si Acepto");
-            Sleeper.Sleep(1500);
             Thread.sleep(3000);
             driver.findElement(By.xpath("/html/body/my-app/main/saleprocess/div/div/div/salesummary/div[2]/div/div[2]/div[4]/a")).click();
-            Thread.sleep(3000);
             scrollBar();
-            driver.findElement(By.xpath("/html/body/my-app/main/saleprocess/div/div/div/contract/div/div/div[2]/div[3]/div[3]/div/div/div/a")).click();
+            Thread.sleep(3000);
+            ExtentReportUtil.INSTANCE.stepPass(driver, "Click en el boton Continuar");
+            generateWord.sendText("Click en el boton Continuar");
+            generateWord.addImageToWord(driver);
+            driver.findElement(By.xpath("/html/body/my-app/main/saleprocess/div/div/div/contract/div/div/div[2]/div[4]/div[3]/div/div/div/a")).click();
 
         }
 
@@ -723,11 +724,14 @@ public class MovistarFija {
             while (driver.findElements(By.xpath("/html/body/my-app/main/saleprocess/div/div/div/reniec/div[2]/div[1]/div/a[1]")).size()!=0) {
                 driver.navigate().refresh();
             }
+
             Select objDriver = new Select(driver.findElement(By.id("parentescoSelect")));
-            objDriver.selectByVisibleText("ELIZABETH TRINIDAD");
+            objDriver.selectByVisibleText("TEODORA");
+            ExtentReportUtil.INSTANCE.stepPass(driver, "Respuesta de Reniec");
+            generateWord.sendText("Respuesta de Reniec");
+            generateWord.addImageToWord(driver);
             Sleeper.Sleep(1500);
             scrollBar();
-            ExtentReportUtil.INSTANCE.stepPass(driver, "Click en el boton Siguiente");
             Sleeper.Sleep(1500);
             driver.findElement(By.xpath("/html/body/my-app/main/saleprocess/div/div/div/reniec/div[2]/div/div[2]/div[4]/a")).click();
 
@@ -741,36 +745,70 @@ public class MovistarFija {
             generateWord.sendText("Tiempo de espera ha excedido");
             generateWord.addImageToWord(driver);
 
+
         }
 
     }
 
-    @And("^Realizar agendamiento, seleccionar horario e ingresar nombre, numero y finalizar venta$")
-    public void realizarAgendamientoSeleccionarHorarioEIngresarNombreNumeroYFinalizarVenta() throws Exception {
+    @Then("^ingresar nombre, numero y finalizar venta$")
+    public void ingresarNombreNumeroYFinalizarVenta() throws Exception {
         try {
-            generateWord.sendText("Agendamiento de instalacion");
-            generateWord.addImageToWord(driver );
-            driver.findElement(By.linkText("6")).click();
-            Thread.sleep(3000);
-            driver.findElement(agendmañana).click();
-            Thread.sleep(3000);
-            driver.findElement(numerocelular).sendKeys("999999999");
+
+            driver.findElement(By.id("0fullName")).clear();
+            driver.findElement(By.id("0fullName")).sendKeys("EDWIN");
+            Sleeper.Sleep(1500);
+            driver.findElement(By.id("0phoneNumber")).clear();
+            driver.findElement(By.id("0phoneNumber")).sendKeys("959678080");
+            Sleeper.Sleep(1500);
+            scrollBar();
+            ExtentReportUtil.INSTANCE.stepPass(driver, "Ingresar nombre y numero");
+            generateWord.sendText("Ingresar nombre y numero");
+            generateWord.addImageToWord(driver);
             driver.findElement(By.xpath("/html/body/my-app/main/contactoinstalacion/div/div/div[2]/app-form-contacto/div/div[1]/a")).click();
-
-
+            Thread.sleep(5000);
+            ExtentReportUtil.INSTANCE.stepPass(driver, "Venta finalizada");
+            generateWord.sendText("Venta finalizada");
+            generateWord.addImageToWord(driver);
+            Sleeper.Sleep(1500);
 
         }
         catch (Exception e){
+
             System.out.println("Error en  " + e.getMessage());
             ExtentReportUtil.INSTANCE.stepFail(driver, "Fallo el caso de prueba : " + e.getMessage());
             ExcelReader.writeCellValue(EXCEL_WEB, LOGIN_WEB, 1, 19, "FAIL");
             generateWord.sendText("Tiempo de espera ha excedido");
             generateWord.addImageToWord(driver);
+
         }
-
-
-
     }
+
+
+
+//    @And("^Realizar agendamiento, seleccionar horario e ingresar nombre, numero y finalizar venta$")
+//    public void realizarAgendamientoSeleccionarHorarioEIngresarNombreNumeroYFinalizarVenta() throws Exception {
+//        try {
+//            generateWord.sendText("Agendamiento de instalacion");
+//            generateWord.addImageToWord(driver );
+//            driver.findElement(By.linkText("6")).click();
+//            Thread.sleep(3000);
+//            driver.findElement(agendmañana).click();
+//            Thread.sleep(3000);
+//            driver.findElement(numerocelular).sendKeys("999999999");
+//            driver.findElement(By.xpath("/html/body/my-app/main/contactoinstalacion/div/div/div[2]/app-form-contacto/div/div[1]/a")).click();
+//
+//        }
+//        catch (Exception e){
+//            System.out.println("Error en  " + e.getMessage());
+//            ExtentReportUtil.INSTANCE.stepFail(driver, "Fallo el caso de prueba : " + e.getMessage());
+//            ExcelReader.writeCellValue(EXCEL_WEB, LOGIN_WEB, 1, 19, "FAIL");
+//            generateWord.sendText("Tiempo de espera ha excedido");
+//            generateWord.addImageToWord(driver);
+//        }
+//
+//
+//
+//    }
 
 
 //SVA
@@ -791,17 +829,6 @@ public class MovistarFija {
     // NUEVO FLUJO
 
 
-
-//
-//            driver.findElement(By.id("name_")).clear();
-//            driver.findElement(By.id("name_")).sendKeys("EDWIN");
-//           Sleeper.Sleep(1500);
-//         driver.findElement(By.id("telefono")).clear();
-//            driver.findElement(By.id("telefono")).sendKeys("959678080");
-//            Sleeper.Sleep(1500);
-//            scrollBar();
-//          driver.findElement(By.xpath("/html/body/my-app/main/contactoinstalacion/div/div/div[2]/div[7]/a")).click();
-//           Sleeper.Sleep(1500);
 
 
 
@@ -830,8 +857,6 @@ public class MovistarFija {
         JavascriptExecutor ev = (JavascriptExecutor) driver;
         ev.executeScript("window.scrollBy(0, 720)");
     }
-
-
 
 
 

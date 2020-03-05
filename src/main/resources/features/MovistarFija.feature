@@ -26,7 +26,8 @@ Feature: Movistar Fija
     And Aceptar condiciones y ingresar email
     And Confirmar el resumen de la venta y aceptar el speech de grabacion
     And Ingresar la respuesta de Reniec
-    And Realizar agendamiento, seleccionar horario e ingresar nombre, numero y finalizar venta
+    Then ingresar nombre, numero y finalizar venta
+#    And Realizar agendamiento, seleccionar horario e ingresar nombre, numero y finalizar venta
 
 
 
