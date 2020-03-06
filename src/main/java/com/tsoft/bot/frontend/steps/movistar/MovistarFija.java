@@ -783,9 +783,7 @@ public class MovistarFija {
         }
     }
 
-
-
-//    @And("^Realizar agendamiento, seleccionar horario e ingresar nombre, numero y finalizar venta$")
+    //    @And("^Realizar agendamiento, seleccionar horario e ingresar nombre, numero y finalizar venta$")
 //    public void realizarAgendamientoSeleccionarHorarioEIngresarNombreNumeroYFinalizarVenta() throws Exception {
 //        try {
 //            generateWord.sendText("Agendamiento de instalacion");
@@ -809,6 +807,10 @@ public class MovistarFija {
 //
 //
 //    }
+
+
+
+
 
 
 //SVA
