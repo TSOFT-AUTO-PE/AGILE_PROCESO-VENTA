@@ -783,16 +783,17 @@ public class MovistarFija {
         }
     }
 
-    //    @And("^Realizar agendamiento, seleccionar horario e ingresar nombre, numero y finalizar venta$")
+//    @Then("^Realizar agendamiento, seleccionar horario e ingresar nombre, numero y finalizar venta$")
 //    public void realizarAgendamientoSeleccionarHorarioEIngresarNombreNumeroYFinalizarVenta() throws Exception {
+//
 //        try {
 //            generateWord.sendText("Agendamiento de instalacion");
 //            generateWord.addImageToWord(driver );
-//            driver.findElement(By.linkText("6")).click();
+//            driver.findElement(By.xpath("/html/body/my-app/main/saleprocess/div/div/div/app-schedule/div[1]/div[4]/div[1]/div/div/my-date-picker/div/div/table[2]/tbody/tr[3]/td[4]")).click();
 //            Thread.sleep(3000);
 //            driver.findElement(agendmañana).click();
 //            Thread.sleep(3000);
-//            driver.findElement(numerocelular).sendKeys("999999999");
+//            driver.findElement(numerocelular).sendKeys("999999998");
 //            driver.findElement(By.xpath("/html/body/my-app/main/contactoinstalacion/div/div/div[2]/app-form-contacto/div/div[1]/a")).click();
 //
 //        }
@@ -805,32 +806,7 @@ public class MovistarFija {
 //        }
 //
 //
-//
 //    }
-
-
-
-
-
-
-//SVA
-
-
-//CONDICIONES - EMAIL
-
-
-
-//RESUMEN DE VENTA - PRECIO - SPEECH DE GRABACION
-
-
-
-//RESPUESTA DE RENIEC
-
-
-
-    // NUEVO FLUJO
-
-
 
 
 
