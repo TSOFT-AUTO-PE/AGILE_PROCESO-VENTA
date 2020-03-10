@@ -15,10 +15,7 @@ Feature: Movistar Fija
     And regresar a la web de ventas
     And Click en el boton Iniciar Sesion
     And Seleccionar en el menu Altas Nuevas
-#    And Click en el boton Obviar y continuar
     When Ingresar datos del cliente "<caso_prueba>"
-#    When Validar servicio reniec, consultar nuevamente "<caso_prueba>"
-#    And Ingresar datos de validacion del cliente "<caso_prueba>"
     And Ingresar lugar de ubicacion "<caso_prueba>"
     And Click en el boton Continuar, Lugar Ubicacion
     When Seleccionar tipo de producto y nombre de producto "<caso_prueba>"
@@ -32,6 +29,7 @@ Feature: Movistar Fija
     Examples:
       | caso_prueba |
       |           1 |
+
 
 
 @MovistarFija2
@@ -49,10 +47,7 @@ Feature: Movistar Fija
     And regresar a la web de ventas
     And Click en el boton Iniciar Sesion
     And Seleccionar en el menu Altas Nuevas
-#    And Click en el boton Obviar y continuar
     When Ingresar datos del cliente "<caso_prueba>"
-#    When Validar servicio reniec, consultar nuevamente "<caso_prueba>"
-#    And Ingresar datos de validacion del cliente "<caso_prueba>"
     And Ingresar lugar de ubicacion "<caso_prueba>"
     And Click en el boton Continuar, Lugar Ubicacion
     When Seleccionar tipo de producto y nombre de producto "<caso_prueba>"
@@ -66,6 +61,7 @@ Feature: Movistar Fija
     Examples:
       | caso_prueba |
       |           2 |
+
 
 
   @MovistarFija3
@@ -84,10 +80,7 @@ Feature: Movistar Fija
     And regresar a la web de ventas
     And Click en el boton Iniciar Sesion
     And Seleccionar en el menu Altas Nuevas
-#    And Click en el boton Obviar y continuar
     When Ingresar datos del cliente "<caso_prueba>"
-#    When Validar servicio reniec, consultar nuevamente "<caso_prueba>"
-#    And Ingresar datos de validacion del cliente "<caso_prueba>"
     And Ingresar lugar de ubicacion "<caso_prueba>"
     And Click en el boton Continuar, Lugar Ubicacion
     When Seleccionar tipo de producto y nombre de producto "<caso_prueba>"
