@@ -7,10 +7,9 @@ import org.testng.annotations.Test;
 
 @CucumberOptions(
 		features={"src//main//resources//features"},
-		glue={"com.tsoft.bot.frontend.steps.movistar","com.tsoft.bot.frontend.helpers"},
+		glue={"com.tsoft.bot.frontend.steps.MyStore","com.tsoft.bot.frontend.helpers"},
 		plugin = {"pretty", "html:target/cucumber"},
-		tags = {"@MovistarFija"},
-		strict =  true,
+		tags = {"@MyStore_RegisterStep1"},
 		monochrome = true
 	)
 

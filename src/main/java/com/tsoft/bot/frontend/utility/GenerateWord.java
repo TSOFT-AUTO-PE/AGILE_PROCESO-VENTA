@@ -23,7 +23,7 @@ public class GenerateWord {
 
     public void startUpWord() throws IOException, InvalidFormatException {
 
-        File fileUnique = new File(FileHelper.getProjectFolder() + "/src/main/resources/doc/Evidencia.docx");
+        File fileUnique = new File(FileHelper.getProjectFolder() + "/src/main/resources/doc/Evidencia2.docx");
 
         copyExistentWord(fileUnique);
 
@@ -33,7 +33,7 @@ public class GenerateWord {
 
         run             = paragraph.createRun();
 
-        fileOutputStream = new FileOutputStream("C:/Users/JUAN~1.REB/AppData/Local/Temp/Evidencia.docx");
+        fileOutputStream = new FileOutputStream("C:/Users/JUAN~1.REB/AppData/Local/Temp/Evidencia2.docx");
 
         InputStream insertTemplate = new FileInputStream(FileHelper.getProjectFolder() + "/src/main/resources/doc/Plantila.png");
 
@@ -54,7 +54,7 @@ public class GenerateWord {
 
             File fileUnique = new File(file.getPath());
 
-            File copyFile = new File("C:/Users/JUAN~1.REB/AppData/Local/Temp/Evidencia.docx");
+            File copyFile = new File("C:/Users/JUAN~1.REB/AppData/Local/Temp/Evidencia2.docx");
 
             inputStream = new FileInputStream(fileUnique);
 

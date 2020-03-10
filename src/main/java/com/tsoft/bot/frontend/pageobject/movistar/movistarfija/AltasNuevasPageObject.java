@@ -13,8 +13,8 @@ public class AltasNuevasPageObject {
     public static final String CBO_DEPARTAMENTO = "department";
     public static final String CBO_PROVINCIA = "city";
     public static final String CBO_DISTRITO = "district";
-    public static final String BTN_EVALUAR = "/html/body/my-app/main/searchuser/div/div/div[2]/form/div[6]/button";
-    public static final String BTN_CONTINUAR_DC = "/html/body/my-app/main/searchuser/div/div/div[2]/div[4]/button";
+    public static final String BTN_EVALUAR = "//button[contains(text(),'evaluar')]";
+    public static final String BTN_CONTINUAR_DC = "//button[contains(text(),'CONTINUAR')]";
     public static final String BTN_CONSULTAR_NUEVAMENTE = "//a[contains(text(),'Consultar nuevamente')]";
 
     public static final String TXT_APELLIDO_CLIENTE = "//table/tbody/tr[1]/td[2]/input";

@@ -24,7 +24,6 @@ import java.util.concurrent.TimeUnit;
 public class Hook extends Listener {
 
 	private static final String URL_MOVISTAR_FIJA   = "http://tdp-web-venta-fija-qa.mybluemix.net/acciones";
-	private static final String URL_MOVISTAR_FIJA_2 = "https://tdp-admin-venta-fija-qa.mybluemix.net";
     private static final String CHROME_DRIVER = "/src/main/resources/driver/chromedriver.exe";
 
     private static WebDriver driver;
