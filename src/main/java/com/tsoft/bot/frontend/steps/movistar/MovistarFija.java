@@ -7,8 +7,10 @@ import com.tsoft.bot.frontend.utility.GenerateWord;
 import com.tsoft.bot.frontend.utility.Sleeper;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.*;
+import org.openqa.selenium.remote.server.handler.interactions.touch.Scroll;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -44,6 +46,9 @@ public class MovistarFija {
 	public static final String CAMPO_REEMPLAZAR = "*Field*";
 	private static final String URL_MOVISTAR_FIJA   = "http://tdp-web-venta-fija-qa.mybluemix.net/acciones";
 	private static GenerateWord generateWord = new GenerateWord();
+	By agendmañana=By.xpath("/html/body/my-app/main/saleprocess/div/div/div/app-schedule/div[1]/div[4]/div[2]/div/div[1]/div[1]/div");
+	By agendtarde=By.xpath("/html/body/my-app/main/saleprocess/div/div/div/app-schedule/div[1]/div[4]/div[2]/div/div[1]/div[2]/div");
+	By numerocelular=By.id("0phoneNumber");
 	private WebDriver driver;
 
 	public MovistarFija() {
@@ -419,31 +424,198 @@ public class MovistarFija {
 					generateWord.addImageToWord(driver);
 					break;
 			}
-
-			driver.switchTo().defaultContent();
-			Sleeper.Sleep(1500);
-			driver.findElement(By.xpath("//a[text()='CONTINUAR']")).click();
-			ExtentReportUtil.INSTANCE.stepPass(driver, "Click en el boton Continuar");
-
-			generateWord.sendText("Click en el boton Continuar");
-			generateWord.addImageToWord(driver);
-			Sleeper.Sleep(1500);
-			driver.findElement(By.xpath("//img[@class='user']")).click();
-
-			Sleeper.Sleep(1500);
-			driver.findElement(By.xpath("//a[@id='cierrate']")).click();
-			Sleeper.Sleep(1500);
-			ExtentReportUtil.INSTANCE.stepPass(driver, "Click en el boton Cerrar sesión");
-			generateWord.sendText("Cerramos sesión");
-			generateWord.addImageToWord(driver);
-			driver.switchTo().alert().accept();
-			ExcelReader.writeCellValue(EXCEL_WEB, LOGIN_WEB, 1, 19, "PASS");
 		}catch (Exception e){
 			//ExtentReportUtil.INSTANCE.stepFail(driver, "Fallo el caso de prueba : " + e.getMessage());
 			ExcelReader.writeCellValue(EXCEL_WEB, LOGIN_WEB, 1, 19, "FAIL");
 		}
-	
+
+
+
 	}
+
+	@And("^Seleccionar SVAS$")
+	public void seleccionarSVAS() throws Exception {
+
+		try {
+
+			driver.switchTo().defaultContent();
+			Sleeper.Sleep(1500);
+			scrollBar();
+			ExtentReportUtil.INSTANCE.stepPass(driver, "Click en el boton Continuar");
+			generateWord.sendText("Click en el boton Continuar");
+			generateWord.addImageToWord(driver);
+			driver.findElement(By.xpath("//a[text()='CONTINUAR']")).click();
+
+		}
+		catch (Exception e){
+			System.out.println("Error en  " + e.getMessage());
+			ExtentReportUtil.INSTANCE.stepFail(driver, "Fallo el caso de prueba : " + e.getMessage());
+			ExcelReader.writeCellValue(EXCEL_WEB, LOGIN_WEB, 1, 19, "FAIL");
+			generateWord.sendText("Tiempo de espera ha excedido");
+			generateWord.addImageToWord(driver);
+
+		}
+
+
+	}
+
+	@And("^Aceptar condiciones y ingresar email$")
+	public void aceptarCondicionesYIngresarEmail() throws Exception {
+
+		try {
+
+			driver.findElement(By.id("email")).clear();
+			driver.findElement(By.id("email")).sendKeys("test@test.com");
+			Sleeper.Sleep(1500);
+			ExtentReportUtil.INSTANCE.stepPass(driver, "Agregar email");
+			scrollBar();
+			ExtentReportUtil.INSTANCE.stepPass(driver, "Click en el boton Continuar");
+			generateWord.sendText("Click en el boton Continuar");
+			generateWord.addImageToWord(driver);
+			scrollBar();
+			Sleeper.Sleep(1500);
+			driver.findElement(By.xpath("/html/body/my-app/main/saleprocess/div/div/div/salecondition/div/div/div[2]/div[4]/a")).click();
+		}
+
+		catch (Exception e){
+
+			System.out.println("Error en  " + e.getMessage());
+			ExtentReportUtil.INSTANCE.stepFail(driver, "Fallo el caso de prueba : " + e.getMessage());
+			ExcelReader.writeCellValue(EXCEL_WEB, LOGIN_WEB, 1, 19, "FAIL");
+			generateWord.sendText("Tiempo de espera ha excedido");
+			generateWord.addImageToWord(driver);
+		}
+
+
+	}
+
+	@And("^Confirmar el resumen de la venta y aceptar el speech de grabacion$")
+	public void confirmarElResumenDeLaVentaYAceptarElSpeechDeGrabacion() throws Exception {
+
+		try {
+
+			generateWord.sendText("Se muestra el plan a contratar");
+			generateWord.addImageToWord(driver);
+			ExtentReportUtil.INSTANCE.stepPass(driver, "Click en el boton Continuar");
+			scrollBar();
+			Thread.sleep(3000);
+			driver.findElement(By.xpath("/html/body/my-app/main/saleprocess/div/div/div/salesummary/div[2]/div/div[2]/div[4]/a")).click();
+			scrollBar();
+			Thread.sleep(3000);
+			ExtentReportUtil.INSTANCE.stepPass(driver, "Click en el boton Continuar");
+			generateWord.sendText("Click en el boton Continuar");
+			generateWord.addImageToWord(driver);
+			driver.findElement(By.xpath("/html/body/my-app/main/saleprocess/div/div/div/contract/div/div/div[2]/div[4]/div[3]/div/div/div/a")).click();
+
+		}
+
+		catch (Exception e){
+
+			System.out.println("Error en  " + e.getMessage());
+			ExtentReportUtil.INSTANCE.stepFail(driver, "Fallo el caso de prueba : " + e.getMessage());
+			ExcelReader.writeCellValue(EXCEL_WEB, LOGIN_WEB, 1, 19, "FAIL");
+			generateWord.sendText("Tiempo de espera ha excedido");
+			generateWord.addImageToWord(driver);
+		}
+
+
+	}
+
+//	@And("^Ingresar la respuesta de Reniec$")
+//	public void ingresarLaRespuestaDeReniec() throws Exception {
+//
+//		try {
+//
+//			Sleeper.Sleep(1500);
+//			while (driver.findElements(By.xpath("/html/body/my-app/main/saleprocess/div/div/div/reniec/div[2]/div[1]/div/a[1]")).size()!=0) {
+//				driver.navigate().refresh();
+//			}
+//
+//			Select objDriver = new Select(driver.findElement(By.id("parentescoSelect")));
+//			objDriver.selectByVisibleText("TEODORA");
+//			ExtentReportUtil.INSTANCE.stepPass(driver, "Respuesta de Reniec");
+//			generateWord.sendText("Respuesta de Reniec");
+//			generateWord.addImageToWord(driver);
+//			Sleeper.Sleep(1500);
+//			scrollBar();
+//			Sleeper.Sleep(1500);
+//			driver.findElement(By.xpath("/html/body/my-app/main/saleprocess/div/div/div/reniec/div[2]/div/div[2]/div[4]/a")).click();
+//
+//		}
+//
+//		catch (Exception e){
+//
+//			System.out.println("Error en  " + e.getMessage());
+//			ExtentReportUtil.INSTANCE.stepFail(driver, "Fallo el caso de prueba : " + e.getMessage());
+//			ExcelReader.writeCellValue(EXCEL_WEB, LOGIN_WEB, 1, 19, "FAIL");
+//			generateWord.sendText("Tiempo de espera ha excedido");
+//			generateWord.addImageToWord(driver);
+//
+//
+//		}
+//
+//	}
+
+//	@Then("^ingresar nombre, numero y finalizar venta$")
+//	public void ingresarNombreNumeroYFinalizarVenta() throws Exception {
+//		try {
+//
+//			driver.findElement(By.id("0fullName")).clear();
+//			driver.findElement(By.id("0fullName")).sendKeys("EDWIN");
+//			Sleeper.Sleep(1500);
+//			driver.findElement(By.id("0phoneNumber")).clear();
+//			driver.findElement(By.id("0phoneNumber")).sendKeys("959678080");
+//			Sleeper.Sleep(1500);
+//			scrollBar();
+//			ExtentReportUtil.INSTANCE.stepPass(driver, "Ingresar nombre y numero");
+//			generateWord.sendText("Ingresar nombre y numero");
+//			generateWord.addImageToWord(driver);
+//			driver.findElement(By.xpath("/html/body/my-app/main/contactoinstalacion/div/div/div[2]/app-form-contacto/div/div[1]/a")).click();
+//			Thread.sleep(5000);
+//			ExtentReportUtil.INSTANCE.stepPass(driver, "Venta finalizada");
+//			generateWord.sendText("Venta finalizada");
+//			generateWord.addImageToWord(driver);
+//			Sleeper.Sleep(1500);
+//
+//		}
+//		catch (Exception e){
+//
+//			System.out.println("Error en  " + e.getMessage());
+//			ExtentReportUtil.INSTANCE.stepFail(driver, "Fallo el caso de prueba : " + e.getMessage());
+//			ExcelReader.writeCellValue(EXCEL_WEB, LOGIN_WEB, 1, 19, "FAIL");
+//			generateWord.sendText("Tiempo de espera ha excedido");
+//			generateWord.addImageToWord(driver);
+//
+//		}
+//	}
+
+
+    @Then("^Realizar agendamiento, seleccionar horario e ingresar nombre, numero y finalizar venta$")
+    public void realizarAgendamientoSeleccionarHorarioEIngresarNombreNumeroYFinalizarVenta() throws Exception {
+
+        try {
+            generateWord.sendText("Agendamiento de instalacion");
+            generateWord.addImageToWord(driver );
+            driver.findElement(By.xpath("/html/body/my-app/main/saleprocess/div/div/div/app-schedule/div[1]/div[4]/div[1]/div/div/my-date-picker/div/div/table[2]/tbody/tr[3]/td[6]")).click();
+            Thread.sleep(3000);
+            driver.findElement(agendmañana).click();
+            Thread.sleep(3000);
+            driver.findElement(numerocelular).sendKeys("999999998");
+			Thread.sleep(3000);
+            driver.findElement(By.xpath("/html/body/my-app/main/saleprocess/div/div/div/app-schedule/div[1]/div[4]/div[3]/div/div[3]/a")).click();
+
+        }
+        catch (Exception e){
+            System.out.println("Error en  " + e.getMessage());
+            ExtentReportUtil.INSTANCE.stepFail(driver, "Fallo el caso de prueba : " + e.getMessage());
+            ExcelReader.writeCellValue(EXCEL_WEB, LOGIN_WEB, 1, 19, "FAIL");
+            generateWord.sendText("Tiempo de espera ha excedido");
+            generateWord.addImageToWord(driver);
+        }
+
+
+    }
+
 
 	private List<HashMap<String, String>> getData() throws Throwable {
 		return ExcelReader.data(EXCEL_WEB, LOGIN_WEB);
@@ -453,6 +625,26 @@ public class MovistarFija {
 		JavascriptExecutor ev = (JavascriptExecutor)driver;
 		ev.executeScript("window.scrollBy(0, 720)");
 	}
+
+//				driver.switchTo().defaultContent();
+////			Sleeper.Sleep(1500);
+////			scrollBar();
+////			driver.findElement(By.xpath("//a[text()='CONTINUAR']")).click();
+////			ExtentReportUtil.INSTANCE.stepPass(driver, "Click en el boton Continuar");
+////
+////			generateWord.sendText("Click en el boton Continuar");
+////			generateWord.addImageToWord(driver);
+////			Sleeper.Sleep(1500);
+////			driver.findElement(By.xpath("//img[@class='user']")).click();
+////
+////			Sleeper.Sleep(1500);
+////			driver.findElement(By.xpath("//a[@id='cierrate']")).click();
+////			Sleeper.Sleep(1500);
+////			ExtentReportUtil.INSTANCE.stepPass(driver, "Click en el boton Cerrar sesión");
+////			generateWord.sendText("Cerramos sesión");
+////			generateWord.addImageToWord(driver);
+////			driver.switchTo().alert().accept();
+////			ExcelReader.writeCellValue(EXCEL_WEB, LOGIN_WEB, 1, 19, "PASS");
 
 
 }
