@@ -47,23 +47,6 @@ public class MovistarFija {
     private static final String URL_MOVISTAR_FIJA = "http://tdp-web-venta-fija-qa.mybluemix.net/acciones";
     private static final String URL_MOVISTAR_FIJA_2 = "https://tdp-admin-venta-fija-qa.mybluemix.net";
     private static GenerateWord generateWord = new GenerateWord();
-    By usernameLocator=By.xpath("//input[@name='username']");
-    By passwordLocator=By.xpath("/html/body/my-app/main/completelogin/div[2]/div/div/form/div[2]/input");
-    By registerBtnLocator=By.xpath("/html/body/my-app/main/login/div[2]/div/div/form/div[2]/a");
-    By usernameadminLocator=By.xpath("/html/body/my-app/main/my-login/div/div/div/form/div[2]/div/input");
-    By userpassadminLocator=By.xpath("/html/body/my-app/main/my-login/div/div/div/form/div[3]/div/input");
-    By ingresoBtnLocator=By.xpath("/html/body/my-app/main/my-login/div/div/div/form/div[4]/div/button");
-    By administrarBtnLocator=By.xpath("/html/body/my-app/header/nav/div/div/ul[1]/li[3]/a");
-    By visualizartknBtnLocator=By.xpath("/html/body/my-app/main/my-administration/div/div/div/a/div");
-    By inputuserLocator=By.xpath("/html/body/my-app/main/numerosasociados/div/div/div/div[2]/div/form/div[1]/input");
-    By detailuserLocator=By.xpath("/html/body/my-app/main/numerosasociados/div/div/div/div[4]/table/tbody/tr/td[8]/a");
-    By tokenuserLocator=By.xpath("/html/body/my-app/main/my-numerosasociadosdetail/div/div/div/div/form/table/tbody/tr[5]/td[2]");
-    By ingresartokenLocator=By.xpath("/html/body/my-app/main/nobiometric/div[2]/div/div/form/div[3]/input");
-    By ingresarpassLocator=By.xpath("/html/body/my-app/main/nobiometric/div[2]/div/div/form/div[2]/input");
-    By iniciosesionBtnLocator=By.xpath("/html/body/my-app/main/nobiometric/div[2]/div/div/form/div[4]/a");
-    By agendmañana=By.xpath("/html/body/my-app/main/saleprocess/div/div/div/app-schedule/div[1]/div[4]/div[2]/div/div[1]/div[1]/div");
-    By agendtarde=By.xpath("/html/body/my-app/main/saleprocess/div/div/div/app-schedule/div[1]/div[4]/div[2]/div/div[1]/div[2]/div");
-    By numerocelular=By.id("0fullName");
     private WebDriver driver;
 
     public MovistarFija() {
@@ -176,11 +159,11 @@ public class MovistarFija {
     public void ingresarUsuarioAdminYLaContraseña(String casoDePrueba) throws Throwable {
         try {
             int movistarFija = Integer.parseInt(casoDePrueba) - 1;
-            driver.findElement(usernameadminLocator).clear();
+            driver.findElement(By.name(TXT_CODIGO_ATIS_USUARIO)).clear();
             String useradmin = getData().get(movistarFija).get(COLUMNA_USER);
             String pwdadmin = getData().get(movistarFija).get(COLUMNA_PWD);
-            driver.findElement(usernameadminLocator).sendKeys(useradmin);
-            driver.findElement(userpassadminLocator).sendKeys(pwdadmin);
+            driver.findElement(By.xpath(usernameLocator)).sendKeys(useradmin);
+            driver.findElement(By.xpath(passwordLocator)).sendKeys(pwdadmin);
             ExtentReportUtil.INSTANCE.stepPass(driver, "    Se ingresa el usuario y la contraseña");
             generateWord.sendText("Se ingresa el usuario y la contraseña");
             generateWord.addImageToWord(driver);
@@ -284,16 +267,6 @@ public class MovistarFija {
 
     }
 
-//    @And("^ingresar al cod atis$")
-//    public void ingresarAlCodAtis() throws Exception {
-//        driver.findElement(detailuserLocator).click();
-//        Thread.sleep(2000);
-//        ExtentReportUtil.INSTANCE.stepPass(driver, "Se ingresa al cod atis");
-//        generateWord.sendText("Se ingresa al cod atis");
-//        generateWord.addImageToWord(driver);
-//    }
-
-
     @And("^regresar a la web de ventas$")
     public void regresarALaWebDeVentas() throws Exception {
         try {
@@ -353,24 +326,6 @@ public class MovistarFija {
             generateWord.addImageToWord(driver);
         }
     }
-
-//	@And("^Click en el boton Obviar y continuar$")
-//	public void clickEnElBotonObviarYContinuar() throws Exception {
-//		try {
-//			scrollBar();
-//			driver.findElement(By.xpath(BTN_OBVIAR_CONTINUAR)).click();
-//			ExtentReportUtil.INSTANCE.stepPass(driver, "Se dió click en el boton 'Obviar y Continuar'");
-//			generateWord.sendText("Se dió click en el boton 'Obviar y Continuar'");
-//			generateWord.addImageToWord(driver);
-//			Sleeper.Sleep(1000);
-//		}catch (Exception e){
-//			ExtentReportUtil.INSTANCE.stepFail(driver, "Fallo el caso de prueba : " + e.getMessage());
-//			ExcelReader.writeCellValue(EXCEL_WEB, LOGIN_WEB, 1, 19, "FAIL");
-//			generateWord.sendText("Tiempo de espera ha excedido");
-//			generateWord.addImageToWord(driver);
-//		}
-//
-//	}
 
     @When("^Ingresar datos del cliente \"([^\"]*)\"$")
     public void ingresarDatosDelCliente(String casoDePrueba) throws Throwable {
@@ -444,61 +399,6 @@ public class MovistarFija {
             generateWord.addImageToWord(driver);
         }
     }
-
-//	@When("^Validar servicio reniec, consultar nuevamente \"([^\"]*)\"$")
-//	public void validarServicioReniecConsultarNuevamente(String casoDePrueba) throws Throwable {
-//		try {
-//			int count = 0;
-//
-//			WebDriverWait wait = new WebDriverWait(driver, 20);
-//
-//			generateWord.sendText("Se muestra servicio reniec, consultar nuevamente");
-//			generateWord.addImageToWord(driver);
-//
-//			while (driver.findElement(By.xpath(BTN_CONSULTAR_NUEVAMENTE)).isDisplayed()) {
-//
-//					wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(BTN_CONSULTAR_NUEVAMENTE))).click();
-//
-//					count++;
-//
-//					if (count == 2) {
-//						break;
-//					} if (count == 1 && !driver.findElement(By.xpath(BTN_CONSULTAR_NUEVAMENTE)).isDisplayed()) {
-//						break;
-//					} else {
-//						continue;
-//					}
-//
-//				}
-//
-//
-//		} catch (Exception e) {
-//			//ExtentReportUtil.INSTANCE.stepFail(driver, "Fallo el caso de prueba : " + e.getMessage());
-//			ExcelReader.writeCellValue(EXCEL_WEB, LOGIN_WEB, 1, 19, "FAIL");
-//			generateWord.sendText("Tiempo de espera ha excedido");
-//			generateWord.addImageToWord(driver);
-//		}
-//
-//	}
-
-//	@And("^Ingresar datos de validacion del cliente \"([^\"]*)\"$")
-//	public void ingresarDatosDeValidacionDelCliente(String casoDePrueba) throws Throwable {
-//		int movistarFija = Integer.parseInt(casoDePrueba) - 1;
-//		WebDriverWait wait = new WebDriverWait(driver, 50);
-//
-//		if (wait.until(ExpectedConditions.presenceOfElementLocated(By.id(CBO_NOMBRE_MADRE))).isDisplayed()){
-//			Select select2 = new Select(wait.until(ExpectedConditions.presenceOfElementLocated(By.id(CBO_NOMBRE_MADRE))));
-//			Sleeper.Sleep(200);
-//			select2.selectByVisibleText("ALEJANDRINA ROSA");
-//			Sleeper.Sleep(300);
-//			driver.switchTo().defaultContent();
-//			Sleeper.Sleep(2000);
-//			scrollBar();
-//			driver.findElement(By.xpath("//a[text()='SIGUIENTE']")).click();
-//			Sleeper.Sleep(2000);
-//		}
-//
-//	}
 
     @And("^Ingresar lugar de ubicacion \"([^\"]*)\"$")
     public void ingresarLugarDeUbicacion(String casoDePrueba) throws Throwable {
@@ -638,7 +538,7 @@ public class MovistarFija {
             ExtentReportUtil.INSTANCE.stepPass(driver, "Click en el boton Continuar");
             generateWord.sendText("Click en el boton Continuar");
             generateWord.addImageToWord(driver);
-            driver.findElement(By.xpath("//a[text()='CONTINUAR']")).click();
+            driver.findElement(By.xpath(BTN_CONTINUAR_SVAS)).click();
 
         }
         catch (Exception e){
@@ -782,49 +682,6 @@ public class MovistarFija {
 
         }
     }
-
-//    @Then("^Realizar agendamiento, seleccionar horario e ingresar nombre, numero y finalizar venta$")
-//    public void realizarAgendamientoSeleccionarHorarioEIngresarNombreNumeroYFinalizarVenta() throws Exception {
-//
-//        try {
-//            generateWord.sendText("Agendamiento de instalacion");
-//            generateWord.addImageToWord(driver );
-//            driver.findElement(By.xpath("/html/body/my-app/main/saleprocess/div/div/div/app-schedule/div[1]/div[4]/div[1]/div/div/my-date-picker/div/div/table[2]/tbody/tr[3]/td[4]")).click();
-//            Thread.sleep(3000);
-//            driver.findElement(agendmañana).click();
-//            Thread.sleep(3000);
-//            driver.findElement(numerocelular).sendKeys("999999998");
-//            driver.findElement(By.xpath("/html/body/my-app/main/contactoinstalacion/div/div/div[2]/app-form-contacto/div/div[1]/a")).click();
-//
-//        }
-//        catch (Exception e){
-//            System.out.println("Error en  " + e.getMessage());
-//            ExtentReportUtil.INSTANCE.stepFail(driver, "Fallo el caso de prueba : " + e.getMessage());
-//            ExcelReader.writeCellValue(EXCEL_WEB, LOGIN_WEB, 1, 19, "FAIL");
-//            generateWord.sendText("Tiempo de espera ha excedido");
-//            generateWord.addImageToWord(driver);
-//        }
-//
-//
-//    }
-
-
-
-
-
-
-//
-//			Sleeper.Sleep(1500);
-//			driver.findElement(By.xpath("//a[@id='cierrate']")).click();
-//			Sleeper.Sleep(1500);
-//			ExtentReportUtil.INSTANCE.stepPass(driver, "Click en el boton Cerrar sesión");
-//			generateWord.sendText("Cerramos sesión");
-//			generateWord.addImageToWord(driver);
-//			driver.switchTo().alert().accept();
-//			ExcelReader.writeCellValue(EXCEL_WEB, LOGIN_WEB, 1, 19, "PASS");
-
-
-
 
 
     private List<HashMap<String, String>> getData() throws Throwable {
