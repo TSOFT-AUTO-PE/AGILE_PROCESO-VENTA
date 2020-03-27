@@ -1,10 +1,7 @@
-package com.tsoft.bot.frontend.listener;
+package com.test.bot.frontend.listener;
 
-import com.tsoft.bot.frontend.utility.ExtentReportUtil;
-import com.tsoft.bot.frontend.utility.FileHelper;
-import org.testng.ITestContext;
-import org.testng.ITestListener;
-import org.testng.ITestResult;
+import com.test.bot.frontend.utility.ExtentReportUtil;
+import com.test.bot.frontend.utility.FileHelper;
 
 public class Listener {
 

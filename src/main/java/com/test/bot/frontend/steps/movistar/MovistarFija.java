@@ -1,10 +1,12 @@
-package com.tsoft.bot.frontend.steps.movistar;
+package com.test.bot.frontend.steps.movistar;
 
-import com.tsoft.bot.frontend.helpers.Hook;
-import com.tsoft.bot.frontend.utility.ExcelReader;
-import com.tsoft.bot.frontend.utility.ExtentReportUtil;
-import com.tsoft.bot.frontend.utility.GenerateWord;
-import com.tsoft.bot.frontend.utility.Sleeper;
+import com.test.bot.frontend.helpers.Hook;
+import com.test.bot.frontend.pageobject.movistar.movistarfija.AltasNuevasPageObject;
+import com.test.bot.frontend.pageobject.movistar.movistarfija.LoginPageObject;
+import com.test.bot.frontend.utility.ExcelReader;
+import com.test.bot.frontend.utility.ExtentReportUtil;
+import com.test.bot.frontend.utility.GenerateWord;
+import com.test.bot.frontend.utility.Sleeper;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -15,9 +17,6 @@ import org.openqa.selenium.support.ui.Select;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import static com.tsoft.bot.frontend.pageobject.movistar.movistarfija.AltasNuevasPageObject.*;
-import static com.tsoft.bot.frontend.pageobject.movistar.movistarfija.LoginPageObject.*;
 
 public class MovistarFija {
 
@@ -73,9 +72,9 @@ public class MovistarFija {
     public void ingresarCodigoATISUsuario(String casoDePrueba) throws Throwable {
         try {
             int movistarFija = Integer.parseInt(casoDePrueba) - 1;
-            driver.findElement(By.xpath(TXT_CODIGO_ATIS_USUARIO)).clear();
+            driver.findElement(By.xpath(LoginPageObject.TXT_CODIGO_ATIS_USUARIO)).clear();
             String codigoAtis = getData().get(movistarFija).get(COLUMNA_USUARIO);
-            driver.findElement(By.xpath(TXT_CODIGO_ATIS_USUARIO)).sendKeys(codigoAtis);
+            driver.findElement(By.xpath(LoginPageObject.TXT_CODIGO_ATIS_USUARIO)).sendKeys(codigoAtis);
             ExtentReportUtil.INSTANCE.stepPass(driver, "Se ingresó el usuario : " + codigoAtis);
             generateWord.sendText("Se ingresó el codigo ATIS / Usuario ");
             generateWord.addImageToWord(driver);
@@ -90,7 +89,7 @@ public class MovistarFija {
     @And("^Click en el boton Continuar$")
     public void clickEnElBotonContinuar() throws Exception {
         try {
-            driver.findElement(By.xpath(BTN_CONTINUAR_)).click();
+            driver.findElement(By.xpath(LoginPageObject.BTN_CONTINUAR_)).click();
             ExtentReportUtil.INSTANCE.stepPass(driver, "Se dió click en el boton 'Continuar'");
         } catch (Exception e) {
             ExtentReportUtil.INSTANCE.stepFail(driver, "Fallo el caso de prueba : " + e.getMessage());
@@ -105,14 +104,14 @@ public class MovistarFija {
         try {
             int movistarFija = Integer.parseInt(casoDePrueba) - 1;
             String contrasenia = getData().get(movistarFija).get(COLUMNA_CONTRASENIA);
-            String getUsuario = driver.findElement(By.xpath(TXT_CODIGO_ATIS_USUARIO)).getAttribute("value");
+            String getUsuario = driver.findElement(By.xpath(LoginPageObject.TXT_CODIGO_ATIS_USUARIO)).getAttribute("value");
 
             if (!getUsuario.equals(getData().get(movistarFija).get(COLUMNA_USUARIO))) {
-                driver.findElement(By.id(TXT_CODIGO_ATIS_USUARIO)).sendKeys(getData().get(movistarFija).get(COLUMNA_USUARIO));
+                driver.findElement(By.id(LoginPageObject.TXT_CODIGO_ATIS_USUARIO)).sendKeys(getData().get(movistarFija).get(COLUMNA_USUARIO));
                 ExtentReportUtil.INSTANCE.stepPass(driver, "Se ingresó el usuario : " + getData().get(movistarFija).get(COLUMNA_USUARIO));
 
             }
-            driver.findElement(By.id(BTN_CONTRASENIA)).sendKeys(contrasenia);
+            driver.findElement(By.id(LoginPageObject.BTN_CONTRASENIA)).sendKeys(contrasenia);
             ExtentReportUtil.INSTANCE.stepPass(driver, "Se ingresó la contraseña'");
             generateWord.sendText("Se ingresó el usuario y contraseña");
             generateWord.addImageToWord(driver);
@@ -159,16 +158,16 @@ public class MovistarFija {
     public void ingresarUsuarioAdminYLaContraseña(String casoDePrueba) throws Throwable {
         try {
             int movistarFija = Integer.parseInt(casoDePrueba) - 1;
-            driver.findElement(By.name(TXT_CODIGO_ATIS_USUARIO)).clear();
+            driver.findElement(By.name(LoginPageObject.TXT_CODIGO_ATIS_USUARIO)).clear();
             String useradmin = getData().get(movistarFija).get(COLUMNA_USER);
             String pwdadmin = getData().get(movistarFija).get(COLUMNA_PWD);
-            driver.findElement(By.xpath(usernameLocator)).sendKeys(useradmin);
-            driver.findElement(By.xpath(passwordLocator)).sendKeys(pwdadmin);
+            driver.findElement(By.xpath(LoginPageObject.usernameLocator)).sendKeys(useradmin);
+            driver.findElement(By.xpath(LoginPageObject.passwordLocator)).sendKeys(pwdadmin);
             ExtentReportUtil.INSTANCE.stepPass(driver, "    Se ingresa el usuario y la contraseña");
             generateWord.sendText("Se ingresa el usuario y la contraseña");
             generateWord.addImageToWord(driver);
             Thread.sleep(2000);
-            driver.findElement(ingresoBtnLocator).click();
+            driver.findElement(By.xpath(LoginPageObject.ingresoBtnLocator)).click();
             ExtentReportUtil.INSTANCE.stepPass(driver, "Se ingresa a la web admin");
             generateWord.sendText("Se ingresa a la web admin");
             generateWord.addImageToWord(driver);
@@ -187,7 +186,7 @@ public class MovistarFija {
         try {
 
 
-            driver.findElement(administrarBtnLocator).click(); //  Administración
+            driver.findElement(By.xpath(LoginPageObject.administrarBtnLocator)).click(); //  Administración
             Thread.sleep(2000);
             ExtentReportUtil.INSTANCE.stepPass(driver, "Se ingresa a los modulos");
             generateWord.sendText("Se ingresa a los modulos");
@@ -205,7 +204,7 @@ public class MovistarFija {
     @And("^Click en visualizar tokens admin$")
     public void clickEnVisualizarTokensAdmin() throws Throwable {
         try{
-            driver.findElement(visualizartknBtnLocator).click();
+            driver.findElement(By.xpath(LoginPageObject.visualizartknBtnLocator)).click();
             Thread.sleep(2000);
             ExtentReportUtil.INSTANCE.stepPass(driver, "Se ingresó al modulo visualizar tokens");
             generateWord.sendText("Se ingresó al modulo visualizar tokens");
@@ -226,7 +225,7 @@ public class MovistarFija {
         try {
             int movistarFija = Integer.parseInt(casoDePrueba) - 1;
             String codigoAtis = getData().get(movistarFija).get(COLUMNA_USUARIO);
-            driver.findElement(inputuserLocator).sendKeys(codigoAtis);
+            driver.findElement(By.xpath(LoginPageObject.inputuserLocator)).sendKeys(codigoAtis);
             ExtentReportUtil.INSTANCE.stepPass(driver, "Se escribe el cod atis");
             generateWord.sendText("Se escribe el cod atis");
             generateWord.addImageToWord(driver);
@@ -246,13 +245,13 @@ public class MovistarFija {
     @And("^click en ver cod atis$")
     public void clickEnVerCodAtis() throws Throwable {
         try {
-            driver.findElement(inputuserLocator).sendKeys(Keys.ENTER);
+            driver.findElement(By.xpath(LoginPageObject.inputuserLocator)).sendKeys(Keys.ENTER);
             Thread.sleep(2000);
             ExtentReportUtil.INSTANCE.stepPass(driver, "Se busca el cod atis");
             generateWord.sendText("Se busca el cod atis");
             generateWord.addImageToWord(driver);
             Thread.sleep(2000);
-            driver.findElement(detailuserLocator).click();
+            driver.findElement(By.xpath(LoginPageObject.detailuserLocator)).click();
             Thread.sleep(2000);
             ExtentReportUtil.INSTANCE.stepPass(driver, "Se ingresa al cod atis");
             generateWord.sendText("Se ingresa al cod atis");
@@ -271,7 +270,7 @@ public class MovistarFija {
     public void regresarALaWebDeVentas() throws Exception {
         try {
 
-            String token = driver.findElement(tokenuserLocator).getText();
+            String token = driver.findElement(By.xpath(LoginPageObject.tokenuserLocator)).getText();
             ExtentReportUtil.INSTANCE.stepPass(driver, "Se obtiene el token");
             generateWord.sendText("Se obtiene el token");
             generateWord.addImageToWord(driver);
@@ -280,7 +279,7 @@ public class MovistarFija {
             driver.switchTo().window(tabs2.get(1));
             driver.close();
             driver.switchTo().window(tabs2.get(0));
-            driver.findElement(ingresartokenLocator).sendKeys(token);
+            driver.findElement(By.xpath(LoginPageObject.ingresartokenLocator)).sendKeys(token);
             ExtentReportUtil.INSTANCE.stepPass(driver, "Se coloca el token");
             generateWord.sendText("Se coloca el token");
             generateWord.addImageToWord(driver);
@@ -297,7 +296,7 @@ public class MovistarFija {
     @And("^Click en el boton Iniciar Sesion$")
     public void clickEnElBotonIniciarSesion() throws Exception {
         try {
-            driver.findElement(By.xpath(BTN_INICIAR_SESION)).click();
+            driver.findElement(By.xpath(LoginPageObject.BTN_INICIAR_SESION)).click();
             Sleeper.Sleep(3000);
             ExtentReportUtil.INSTANCE.stepPass(driver, "Se dió click en el boton 'Iniciar Sesión'");
             generateWord.sendText("Se dió click en el boton 'Iniciar Sesión'");
@@ -314,7 +313,7 @@ public class MovistarFija {
     public void seleccionarEnElMenuAltasNuevas() throws Throwable {
         try {
             Sleeper.Sleep(1500);
-            driver.findElement(By.xpath(BTN_ALTAS_NUEVAS)).click();
+            driver.findElement(By.xpath(LoginPageObject.BTN_ALTAS_NUEVAS)).click();
             ExtentReportUtil.INSTANCE.stepPass(driver, "Se dió click en la opción 'Altas Nuevas'");
             Sleeper.Sleep(1000);
             generateWord.sendText("Se dió click en la opción 'Altas Nuevas'");
@@ -332,45 +331,45 @@ public class MovistarFija {
         try {
             int movistarFija = Integer.parseInt(casoDePrueba) - 1;
             String tipoDocumento = getData().get(movistarFija).get(COLUMNA_TIPO_DOCUMENTO);
-            Select select = new Select(driver.findElement(By.id(CBO_TIPO_DOCUMENTO)));
+            Select select = new Select(driver.findElement(By.id(AltasNuevasPageObject.CBO_TIPO_DOCUMENTO)));
             select.selectByVisibleText(tipoDocumento);
             ExtentReportUtil.INSTANCE.stepPass(driver, "Se elegió el Tipo Documento : " + tipoDocumento);
             String numeroDocumento = getData().get(movistarFija).get(COLUMNA_NUMERO_DOCUMENTO);
             switch (tipoDocumento) {
                 case "DNI":
-                    driver.findElement(By.id(TXT_DNI)).sendKeys(numeroDocumento);
+                    driver.findElement(By.id(AltasNuevasPageObject.TXT_DNI)).sendKeys(numeroDocumento);
                     ExtentReportUtil.INSTANCE.stepPass(driver, "Se ingresó el Número Documento : " + numeroDocumento);
 
                     break;
                 case "Carné de Extranjeria":
-                    driver.findElement(By.id(TXT_CE)).sendKeys(numeroDocumento);
+                    driver.findElement(By.id(AltasNuevasPageObject.TXT_CE)).sendKeys(numeroDocumento);
                     ExtentReportUtil.INSTANCE.stepPass(driver, "Se ingresó el Número Documento : " + numeroDocumento);
                     break;
                 case "Pasaporte":
-                    driver.findElement(By.id(TXT_PASAPORTE)).sendKeys(numeroDocumento);
+                    driver.findElement(By.id(AltasNuevasPageObject.TXT_PASAPORTE)).sendKeys(numeroDocumento);
                     ExtentReportUtil.INSTANCE.stepPass(driver, "Se ingresó el Número Documento : " + numeroDocumento);
                     break;
                 case "RUC":
-                    driver.findElement(By.id(TXT_RUC)).sendKeys(numeroDocumento);
+                    driver.findElement(By.id(AltasNuevasPageObject.TXT_RUC)).sendKeys(numeroDocumento);
                     ExtentReportUtil.INSTANCE.stepPass(driver, "Se ingresó el Número Documento : " + numeroDocumento);
                     break;
                 case "Otros Extranjeros - Aut. SNM":
-                    driver.findElement(By.id(TXT_OTROS)).sendKeys(numeroDocumento);
+                    driver.findElement(By.id(AltasNuevasPageObject.TXT_OTROS)).sendKeys(numeroDocumento);
                     ExtentReportUtil.INSTANCE.stepPass(driver, "Se ingresó el Número Documento : " + numeroDocumento);
                     break;
             }
             String departamento = getData().get(movistarFija).get(COLUMNA_DEPARTAMENTO);
-            Select select2 = new Select(driver.findElement(By.id(CBO_DEPARTAMENTO)));
+            Select select2 = new Select(driver.findElement(By.id(AltasNuevasPageObject.CBO_DEPARTAMENTO)));
             select2.selectByVisibleText(departamento);
             ExtentReportUtil.INSTANCE.stepPass(driver, "Se elegió el Departamento : " + departamento);
             Sleeper.Sleep(500);
             String provincia = getData().get(movistarFija).get(COLUMNA_PROVINCIA);
-            Select select3 = new Select(driver.findElement(By.id(CBO_PROVINCIA)));
+            Select select3 = new Select(driver.findElement(By.id(AltasNuevasPageObject.CBO_PROVINCIA)));
             select3.selectByVisibleText(provincia);
             ExtentReportUtil.INSTANCE.stepPass(driver, "Se elegió el Pronvicia : " + provincia);
             Sleeper.Sleep(500);
             String distrito = getData().get(movistarFija).get(COLUMNA_DISTRITO);
-            Select select4 = new Select(driver.findElement(By.id(CBO_DISTRITO)));
+            Select select4 = new Select(driver.findElement(By.id(AltasNuevasPageObject.CBO_DISTRITO)));
             select4.selectByVisibleText(distrito);
             ExtentReportUtil.INSTANCE.stepPass(driver, "Se elegió el Distrito : " + distrito);
             Sleeper.Sleep(1000);
@@ -378,7 +377,7 @@ public class MovistarFija {
             generateWord.addImageToWord(driver);
             scrollBar();
             scrollBar();
-            driver.findElement(By.xpath(BTN_EVALUAR)).click();
+            driver.findElement(By.xpath(AltasNuevasPageObject.BTN_EVALUAR)).click();
             Sleeper.Sleep(3000);
             ExtentReportUtil.INSTANCE.stepPass(driver, "Se dió click en el boton 'Evaluar'");
             scrollBar();
@@ -388,7 +387,7 @@ public class MovistarFija {
             generateWord.addImageToWord(driver);
             Sleeper.Sleep(3000);
             scrollBar();
-            driver.findElement(By.xpath(BTN_CONTINUAR_DC)).click();
+            driver.findElement(By.xpath(AltasNuevasPageObject.BTN_CONTINUAR_DC)).click();
             ExcelReader.writeCellValue(EXCEL_WEB, LOGIN_WEB, 1, 19, "PASS");
 
         } catch (Exception e) {
@@ -410,11 +409,11 @@ public class MovistarFija {
             Sleeper.Sleep(300);
             Thread.sleep(5000);
             String lugarUbicacion = getData().get(movistarFija).get(COLUMNA_LUGAR_UBICACION);
-            driver.findElement(By.id(TXT_LUGAR_UBICACION)).sendKeys(lugarUbicacion);
-            driver.findElement(By.id(TXT_LUGAR_UBICACION)).sendKeys(Keys.SPACE);
-            driver.findElement(By.id(TXT_LUGAR_UBICACION)).sendKeys(Keys.ENTER);
-            driver.findElement(By.id(TXT_LUGAR_UBICACION)).sendKeys(Keys.SPACE);
-            driver.findElement(By.id(TXT_LUGAR_UBICACION)).sendKeys(Keys.ENTER);
+            driver.findElement(By.id(AltasNuevasPageObject.TXT_LUGAR_UBICACION)).sendKeys(lugarUbicacion);
+            driver.findElement(By.id(AltasNuevasPageObject.TXT_LUGAR_UBICACION)).sendKeys(Keys.SPACE);
+            driver.findElement(By.id(AltasNuevasPageObject.TXT_LUGAR_UBICACION)).sendKeys(Keys.ENTER);
+            driver.findElement(By.id(AltasNuevasPageObject.TXT_LUGAR_UBICACION)).sendKeys(Keys.SPACE);
+            driver.findElement(By.id(AltasNuevasPageObject.TXT_LUGAR_UBICACION)).sendKeys(Keys.ENTER);
             Thread.sleep(5000);
             ExtentReportUtil.INSTANCE.stepPass(driver, "Se ingresó lugar ubicación : " + lugarUbicacion);
             generateWord.sendText("Se ingresó la ubicación correctamente");
@@ -462,11 +461,11 @@ public class MovistarFija {
             String productName = getData().get(movistarFija).get(COLUMNA_NOMBRE_PRODUCTO);
             switch (typeProduct) {
                 case "TRÍO":
-                    driver.findElement(By.xpath(TRIO)).click();
+                    driver.findElement(By.xpath(AltasNuevasPageObject.TRIO)).click();
                     Sleeper.Sleep(1500);
                     scrollBar();
                     int count3 = 0;
-                    List listRow3 = driver.findElements(By.xpath(XPATH_TRIO_ULTRA));
+                    List listRow3 = driver.findElements(By.xpath(AltasNuevasPageObject.XPATH_TRIO_ULTRA));
                     for (int i = 0; i < listRow3.size(); i++) {
                         WebElement contestName = (WebElement) listRow3.get(i);
                         String getName = contestName.getText();
@@ -480,17 +479,17 @@ public class MovistarFija {
                     generateWord.addImageToWord(driver);
                     break;
                 case "DÚO":
-                    driver.findElement(By.xpath(DUO)).click();
+                    driver.findElement(By.xpath(AltasNuevasPageObject.DUO)).click();
                     Sleeper.Sleep(1500);
                     scrollBar();
                     int count2 = 0;
-                    List listRow2 = driver.findElements(By.xpath(XPATH_DUO_ULTRA));
+                    List listRow2 = driver.findElements(By.xpath(AltasNuevasPageObject.XPATH_DUO_ULTRA));
                     for (int i = 0; i < listRow2.size(); i++) {
                         WebElement contestName = (WebElement) listRow2.get(i);
                         String getName = contestName.getText();
                         count2++;
                         if (getName.equalsIgnoreCase(productName)) {
-                            driver.findElement(By.xpath(XPATH_DUO.replace(CAMPO_REEMPLAZAR, Integer.toString(count2)))).click();
+                            driver.findElement(By.xpath(AltasNuevasPageObject.XPATH_DUO.replace(CAMPO_REEMPLAZAR, Integer.toString(count2)))).click();
                             generateWord.sendText("Se elegió el Tipo de Producto : " + typeProduct + ", y se eligió el producto : " + productName);
                             generateWord.addImageToWord(driver);
                             break;
@@ -499,11 +498,11 @@ public class MovistarFija {
                     ExtentReportUtil.INSTANCE.stepPass(driver, "Se elegió el Tipo de Producto : " + typeProduct + ", y se eligió el producto : " + productName);
                     break;
                 case "MONO":
-                    driver.findElement(By.xpath(MONO)).click();
+                    driver.findElement(By.xpath(AltasNuevasPageObject.MONO)).click();
                     Sleeper.Sleep(1500);
                     scrollBar();
                     int count = 0;
-                    List listRow = driver.findElements(By.xpath(XPATH_MONO_ULTRA));
+                    List listRow = driver.findElements(By.xpath(AltasNuevasPageObject.XPATH_MONO_ULTRA));
                     for (int i = 0; i < listRow.size(); i++) {
                         WebElement contestName = (WebElement) listRow.get(i);
                         String getName = contestName.getText();
@@ -538,7 +537,7 @@ public class MovistarFija {
             ExtentReportUtil.INSTANCE.stepPass(driver, "Click en el boton Continuar");
             generateWord.sendText("Click en el boton Continuar");
             generateWord.addImageToWord(driver);
-            driver.findElement(By.xpath(BTN_CONTINUAR_SVAS)).click();
+            driver.findElement(By.xpath(LoginPageObject.BTN_CONTINUAR_SVAS)).click();
 
         }
         catch (Exception e){

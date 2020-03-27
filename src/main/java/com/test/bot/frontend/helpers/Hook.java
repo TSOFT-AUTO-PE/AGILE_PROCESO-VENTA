@@ -1,22 +1,15 @@
-package com.tsoft.bot.frontend.helpers;
+package com.test.bot.frontend.helpers;
 
-import com.tsoft.bot.frontend.listener.Listener;
-import com.tsoft.bot.frontend.utility.FileHelper;
-import com.tsoft.bot.frontend.utility.GenerateWord;
+import com.test.bot.frontend.utility.FileHelper;
+import com.test.bot.frontend.utility.GenerateWord;
+import com.test.bot.frontend.listener.Listener;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 
-import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
