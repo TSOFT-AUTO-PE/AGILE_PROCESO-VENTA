@@ -1,4 +1,4 @@
-package com.tsoft.bot.frontend.utility;
+package com.test.bot.frontend.utility;
 
 public class Sleeper {
 

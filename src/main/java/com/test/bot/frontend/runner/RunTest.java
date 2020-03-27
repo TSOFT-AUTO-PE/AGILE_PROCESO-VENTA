@@ -1,4 +1,4 @@
-package com.tsoft.bot.frontend.runner;
+package com.test.bot.frontend.runner;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.testng.AbstractTestNGCucumberTests;

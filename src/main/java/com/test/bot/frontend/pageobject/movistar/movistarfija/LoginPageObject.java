@@ -1,4 +1,4 @@
-package com.tsoft.bot.frontend.pageobject.movistar.movistarfija;
+package com.test.bot.frontend.pageobject.movistar.movistarfija;
 
 public class LoginPageObject {
 

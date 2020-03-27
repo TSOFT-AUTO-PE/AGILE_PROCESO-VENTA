@@ -1,16 +1,15 @@
-package com.tsoft.bot.frontend.steps.movistar;
+package com.test.bot.frontend.steps.movistar;
 
-import com.tsoft.bot.frontend.helpers.Hook;
-import com.tsoft.bot.frontend.utility.ExcelReader;
-import com.tsoft.bot.frontend.utility.ExtentReportUtil;
-import com.tsoft.bot.frontend.utility.GenerateWord;
-import com.tsoft.bot.frontend.utility.Sleeper;
+import com.test.bot.frontend.utility.ExcelReader;
+import com.test.bot.frontend.utility.ExtentReportUtil;
+import com.test.bot.frontend.utility.GenerateWord;
+import com.test.bot.frontend.utility.Sleeper;
+import com.test.bot.frontend.helpers.Hook;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.*;
-import org.openqa.selenium.remote.server.handler.interactions.touch.Scroll;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,8 +17,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.tsoft.bot.frontend.pageobject.movistar.movistarfija.AltasNuevasPageObject.*;
-import static com.tsoft.bot.frontend.pageobject.movistar.movistarfija.LoginPageObject.*;
+import static com.test.bot.frontend.pageobject.movistar.movistarfija.AltasNuevasPageObject.*;
+import static com.test.bot.frontend.pageobject.movistar.movistarfija.LoginPageObject.*;
 
 public class MovistarFija {
 

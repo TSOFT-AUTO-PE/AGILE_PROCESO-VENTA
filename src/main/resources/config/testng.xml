@@ -3,11 +3,11 @@
 
 <suite name="Regression">
 <!--	<listeners>-->
-<!--		<listener class-name="com.tsoft.bot.frontend.listener.Listener"></listener>-->
+<!--		<listener class-name="Listener"></listener>-->
 <!--	</listeners>-->
 	<test name="GroupTest">
 		<classes>
-			<class name="com.tsoft.bot.frontend.runner.RunTest"/>
+			<class name="com.test.bot.frontend.runner.RunTest"/>
 		</classes>
 	</test>
 </suite>

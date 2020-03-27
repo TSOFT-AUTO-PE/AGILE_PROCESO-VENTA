@@ -1,4 +1,4 @@
-package com.tsoft.bot.frontend.utility;
+package com.test.bot.frontend.utility;
 
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.lang3.StringUtils;
