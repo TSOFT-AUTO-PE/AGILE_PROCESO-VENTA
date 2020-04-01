@@ -11,7 +11,7 @@ public class LoginPageObject {
     public static String BTN_ALTAS_NUEVAS        = "/html/body/my-app/main/acciones/div/div/div[1]/form/div/a[1]";
     public static String BTN_CONTINUAR_SVAS      = "//a[text()='CONTINUAR']";
     public static String usernameLocator         = "//input[@name='username']";
-    public static String passwordLocator         = "/html/body/my-app/main/completelogin/div[2]/div/div/form/div[2]/input";
+    public static String passwordLocator         = "/html/body/my-app/main/my-login/div/div/div/form/div[3]/div/input";
     public static String ingresoBtnLocator       = "/html/body/my-app/main/my-login/div/div/div/form/div[4]/div/button";
     public static String administrarBtnLocator   = "/html/body/my-app/header/nav/div/div/ul[1]/li[3]/a";
     public static String visualizartknBtnLocator = "/html/body/my-app/main/my-administration/div/div/div/a/div";

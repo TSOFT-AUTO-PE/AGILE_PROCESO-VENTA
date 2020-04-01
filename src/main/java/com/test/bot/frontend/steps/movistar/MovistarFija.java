@@ -3,10 +3,8 @@ package com.test.bot.frontend.steps.movistar;
 import com.test.bot.frontend.helpers.Hook;
 import com.test.bot.frontend.pageobject.movistar.movistarfija.AltasNuevasPageObject;
 import com.test.bot.frontend.pageobject.movistar.movistarfija.LoginPageObject;
-import com.test.bot.frontend.utility.ExcelReader;
-import com.test.bot.frontend.utility.ExtentReportUtil;
-import com.test.bot.frontend.utility.GenerateWord;
-import com.test.bot.frontend.utility.Sleeper;
+import com.test.bot.frontend.utility.*;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -20,7 +18,9 @@ import java.util.List;
 
 public class MovistarFija {
 
+
     public static final String CAMPO_REEMPLAZAR = "*Field*";
+    private String obtenerToken;
     private static final String EXCEL_WEB = "excel/MovistarFija.xlsx";
     private static final String LOGIN_WEB = "Login";
     private static final String COLUMNA_USUARIO = "Usuario";
@@ -43,10 +43,18 @@ public class MovistarFija {
     private static final String COLUMNA_TIPO_PRODUCTO = "Tipo Producto";
     private static final String COLUMNA_USER = "Usuario Admin";
     private static final String COLUMNA_PWD = "Contraseña Admin";
+    private static final String COLUMNA_URL_BD = "URL";
+    private static final String COLUMNA_TIPO_BD = "BD";
+    private static final String COLUMNA_PORT_BD = "Port";
+    private static final String COLUMNA_USER_BD = "Username";
+    private static final String COLUMNA_PWS_BD = "Password";
     private static final String URL_MOVISTAR_FIJA = "http://tdp-web-venta-fija-qa.mybluemix.net/acciones";
     private static final String URL_MOVISTAR_FIJA_2 = "https://tdp-admin-venta-fija-qa.mybluemix.net";
     private static GenerateWord generateWord = new GenerateWord();
     private WebDriver driver;
+    LoginToken LoginToken = new LoginToken();
+
+
 
     public MovistarFija() {
         this.driver = Hook.getDriver();
@@ -61,7 +69,7 @@ public class MovistarFija {
             generateWord.sendText("Se inició correctamente la página Movistar");
             generateWord.addImageToWord(driver);
         } catch (Exception e) {
-            ExcelReader.writeCellValue(EXCEL_WEB, LOGIN_WEB, 1, 19, "FAIL");
+            ExcelReader.writeCellValue(EXCEL_WEB, LOGIN_WEB, 1, 24, "FAIL");
             ExtentReportUtil.INSTANCE.stepFail(driver, "Fallo el caso de prueba : " + e.getMessage());
             generateWord.sendText("Tiempo de espera ha excedido");
             generateWord.addImageToWord(driver);
@@ -124,6 +132,33 @@ public class MovistarFija {
 
     }
 
+    @And("^Obtener el token \"([^\"]*)\"$")
+    public void obtenerElToken(String casoDePrueba) throws Throwable {
+        try {
+            int movistarFija = Integer.parseInt(casoDePrueba) - 1;
+            String url_bd = getData().get(movistarFija).get(COLUMNA_URL_BD);
+            String tip_bd = getData().get(movistarFija).get(COLUMNA_TIPO_BD);
+            String port_bd = getData().get(movistarFija).get(COLUMNA_PORT_BD);
+            String usr_bd = getData().get(movistarFija).get(COLUMNA_USER_BD);
+            String pwd_bd = getData().get(movistarFija).get(COLUMNA_PWS_BD);
+            String usu = getData().get(movistarFija).get(COLUMNA_USUARIO);
+
+             obtenerToken = LoginToken.obtener_token(url_bd,tip_bd,port_bd,usr_bd,pwd_bd,usu);
+            driver.findElement(By.xpath(LoginPageObject.ingresartokenLocator)).sendKeys(obtenerToken);
+
+
+        } catch (Exception e){
+            System.out.println("Error en : " + e.getCause());
+            ExtentReportUtil.INSTANCE.stepFail(driver, "Fallo el caso de prueba : " + e.getMessage());
+            ExcelReader.writeCellValue(EXCEL_WEB, LOGIN_WEB, 1, 24, "FAIL");
+            generateWord.sendText("Tiempo de espera ha excedido");
+            generateWord.addImageToWord(driver);
+        }
+
+    }
+
+
+
     @And("^Ingresa a la web admin$")
     public void ingresaALaWebAdmin() throws Throwable {
         try {
@@ -158,7 +193,7 @@ public class MovistarFija {
     public void ingresarUsuarioAdminYLaContraseña(String casoDePrueba) throws Throwable {
         try {
             int movistarFija = Integer.parseInt(casoDePrueba) - 1;
-            driver.findElement(By.name(LoginPageObject.TXT_CODIGO_ATIS_USUARIO)).clear();
+            driver.findElement(By.xpath(LoginPageObject.usernameLocator)).clear();
             String useradmin = getData().get(movistarFija).get(COLUMNA_USER);
             String pwdadmin = getData().get(movistarFija).get(COLUMNA_PWD);
             driver.findElement(By.xpath(LoginPageObject.usernameLocator)).sendKeys(useradmin);

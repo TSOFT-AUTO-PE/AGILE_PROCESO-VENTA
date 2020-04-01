@@ -6,13 +6,14 @@ Feature: Movistar Fija
     And Ingresar codigo ATIS / Usuario "<caso_prueba>"
     And Click en el boton Continuar
     When Validar si el codigo ATIS y ingresar contraseña "<caso_prueba>"
-    And Ingresa a la web admin
-    When Ingresar usuario admin y la contraseña "<caso_prueba>"
-    And Click en Administracion admin
-    And Click en visualizar tokens admin
-    And Buscar con codigo atis "<caso_prueba>"
-    And click en ver cod atis
-    And regresar a la web de ventas
+    And Obtener el token "<caso_prueba>"
+#    And Ingresa a la web admin
+#    When Ingresar usuario admin y la contraseña "<caso_prueba>"
+#    And Click en Administracion admin
+#    And Click en visualizar tokens admin
+#    And Buscar con codigo atis "<caso_prueba>"
+#    And click en ver cod atis
+#    And regresar a la web de ventas
     And Click en el boton Iniciar Sesion
     And Seleccionar en el menu Altas Nuevas
     When Ingresar datos del cliente "<caso_prueba>"
@@ -38,13 +39,13 @@ Feature: Movistar Fija
     And Ingresar codigo ATIS / Usuario "<caso_prueba>"
     And Click en el boton Continuar
     When Validar si el codigo ATIS y ingresar contraseña "<caso_prueba>"
-    And Ingresa a la web admin
-    When Ingresar usuario admin y la contraseña "<caso_prueba>"
-    And Click en Administracion admin
-    And Click en visualizar tokens admin
-    And Buscar con codigo atis "<caso_prueba>"
-    And click en ver cod atis
-    And regresar a la web de ventas
+#    And Ingresa a la web admin
+#    When Ingresar usuario admin y la contraseña "<caso_prueba>"
+#    And Click en Administracion admin
+#    And Click en visualizar tokens admin
+#    And Buscar con codigo atis "<caso_prueba>"
+#    And click en ver cod atis
+#    And regresar a la web de ventas
     And Click en el boton Iniciar Sesion
     And Seleccionar en el menu Altas Nuevas
     When Ingresar datos del cliente "<caso_prueba>"
@@ -71,13 +72,13 @@ Feature: Movistar Fija
     And Ingresar codigo ATIS / Usuario "<caso_prueba>"
     And Click en el boton Continuar
     When Validar si el codigo ATIS y ingresar contraseña "<caso_prueba>"
-    And Ingresa a la web admin
-    When Ingresar usuario admin y la contraseña "<caso_prueba>"
-    And Click en Administracion admin
-    And Click en visualizar tokens admin
-    And Buscar con codigo atis "<caso_prueba>"
-    And click en ver cod atis
-    And regresar a la web de ventas
+#    And Ingresa a la web admin
+#    When Ingresar usuario admin y la contraseña "<caso_prueba>"
+#    And Click en Administracion admin
+#    And Click en visualizar tokens admin
+#    And Buscar con codigo atis "<caso_prueba>"
+#    And click en ver cod atis
+#    And regresar a la web de ventas
     And Click en el boton Iniciar Sesion
     And Seleccionar en el menu Altas Nuevas
     When Ingresar datos del cliente "<caso_prueba>"

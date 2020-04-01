@@ -33,9 +33,11 @@ public class GenerateWord {
 
         fileOutputStream = new FileOutputStream("C:/Users/juan2/AppData/Local/Temp/Evidencia.docx");
 
+
+
         InputStream insertTemplate = new FileInputStream(FileHelper.getProjectFolder() + "/src/main/resources/doc/Plantila.png");
 
-        run.addPicture(insertTemplate, Document.PICTURE_TYPE_PNG, "1", Units.toEMU(440), Units.toEMU(640));
+       run.addPicture(insertTemplate, Document.PICTURE_TYPE_PNG, "1", Units.toEMU(440), Units.toEMU(640));
 
         run.addBreak();
 
